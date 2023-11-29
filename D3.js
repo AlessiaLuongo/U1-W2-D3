@@ -114,7 +114,7 @@ let charactersNames = [];
   Come risultato dovresti ottenere qualcosa di simile: ["Luke Skywalker", "C-3PO", "R2-D2", etc..]
 */
 
-for (i = 0; i < starWarsCharacters.length; i++) {
+for (let i = 0; i < starWarsCharacters.length; i++) {
   charactersNames.push(starWarsCharacters[i].name);
 }
 console.log(charactersNames);
@@ -131,7 +131,7 @@ for (i = 0; i < starWarsCharacters.length; i++) {
     femaleCharacters.push(oggetto);
   }
 }
-console.log(femaleCharacters);
+console.log("female Characters", femaleCharacters);
 
 /* ESERCIZIO 4
   Crea un oggetto "eyeColor" che abbia le seguenti proprietà: blue, yellow, brown, red, blue-gray.
@@ -167,18 +167,26 @@ for (let i = 0; i < starWarsCharacters.length; i++) {
     case "red":
       eyeColor.red.push(element);
       break;
-    case "blueGray":
+    case "blue-gray":
       eyeColor.blueGray.push(element);
-    default:
       break;
+    default:
+      console.log("Colore non gestito");
   }
 }
-console.log(eyeColor);
+console.log("eyeColor", eyeColor);
 
 /* ESERCIZIO 6
   Usa un while loop per calcolare la massa totale dell'equipaggio. Salvala in una variabile chiamata "crewMass".
 */
+let crewMass = 0;
+let index = 0;
 
+while (index < starWarsCharacters.length) {
+  crewMass = crewMass + starWarsCharacters[index].mass;
+  index++;
+}
+console.log("crewMass", crewMass);
 /* ESERCIZIO 7
   Crea uno if/else statement per rivelare la tipologia di carico, 
   utilizzando la massa totale, di un'ipotetica astronave contenente i personaggi dell'array "starWarsCharacters".
@@ -210,6 +218,13 @@ if (crewMass < 500) {
     creare un nuovo array)
 */
 
+for (let i = 0; i < starWarsCharacters.length; i++) {
+  if (starWarsCharacters[i].gender === "n/a") {
+    starWarsCharacters[i].gender = "robot";
+  }
+}
+console.log(starWarsCharacters);
+
 /* --EXTRA-- ESERCIZIO 9
   Utilizzando gli elementi presenti nell'array "femaleCharacters" rimuovi dall'array "charactersNames" 
   le stringhe corrispondenti a personaggi con lo stesso nome.
@@ -217,7 +232,29 @@ if (crewMass < 500) {
   prima e dopo l'operazione.
 */
 
+console.log(charactersNames.length); // 10
+// dobbiamo rimuovere da qui dentro i nomi corrispondenti alle due donne
+for (let i = 0; i < charactersNames.length; i++) {
+  for (let j = 0; j < femaleCharacters.length; j++) {
+    if (charactersNames[i] === femaleCharacters[j].name) {
+      charactersNames.splice(i, 1);
+    }
+  }
+}
+
 /* --EXTRA-- ESERCIZIO 10
   Crea una funzionalità che selezioni un elemento casuale dall'array "starWarsCharacters" e 
   ne stampi in console le proprietà in modo discorsivo (a tuo piacimento).
 */
+
+const randomIndex = Math.floor(Math.random() * 9);
+const randomCharacter = starWarsCharacters[randomIndex];
+
+console.log(
+  "Il mio nome è " +
+    randomCharacter.name +
+    ", peso " +
+    randomCharacter.mass +
+    " kilogrammi, ho gli occhi di colore  " +
+    randomCharacter.eye_color
+);
